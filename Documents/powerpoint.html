@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application de Suivi de Fitness - Présentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .presentation-container {
+            width: 90%;
+            max-width: 1200px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+            padding: 60px;
+            min-height: 700px;
+            position: relative;
+        }
+
+        .slide.active {
+            display: block;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .slide h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .slide h2 {
+            color: #444;
+            font-size: 2em;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .slide h3 {
+            color: #555;
+            font-size: 1.5em;
+            margin: 20px 0 15px 0;
+            color: #667eea;
+        }
+
+        .slide p, .slide li {
+            color: #666;
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .slide ul {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        .slide li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .slide li::before {
+            content: "▶";
+            color: #667eea;
+            font-weight: bold;
+            position: absolute;
+            left: -20px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .tech-stack {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .tech-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 10px;
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .navigation {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-counter {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 10px 15px;
+            border-radius: 20px;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .architecture-diagram {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .arch-box {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            min-width: 150px;
+        }
+
+        .arrow {
+            font-size: 2em;
+            color: #667eea;
+            margin: 0 20px;
+        }
+
+        .timeline {
+            position: relative;
+            margin: 40px 0;
+        }
+
+        .timeline-item {
+            background: #f8f9ff;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .budget-chart {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            height: 200px;
+            margin: 30px 0;
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .budget-bar {
+            background: linear-gradient(to top, #667eea, #764ba2);
+            color: white;
+            padding: 10px;
+            border-radius: 5px 5px 0 0;
+            text-align: center;
+            min-width: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="slide-counter">
+            <span id="current-slide">1</span> / <span id="total-slides">10</span>
+        </div>
+
+        <!-- Slide 1: Titre -->
+        <div class="slide active">
+            <h1>🏋️‍♂️ Application de Suivi de Fitness</h1>
+            <div style="text-align: center; margin: 50px 0;">
+                <div style="font-size: 4em; margin-bottom: 30px;">💪📱</div>
+                <h2 style="border: none; color: #667eea;">Planification d'Entraînement & Suivi de Progression</h2>
+                <p style="font-size: 1.3em; color: #888; margin-top: 30px;">
+                    Une solution complète pour maintenir un mode de vie actif
+                </p>
+            </div>
+            <div style="text-align: center; margin-top: 60px;">
+                <div style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); padding: 20px; border-radius: 15px; display: inline-block;">
+                    <strong>Technologies:</strong> React.js + Express.js + MongoDB
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Vue d'ensemble -->
+        <div class="slide">
+            <h2>📋 Vue d'Ensemble du Projet</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Objectif Principal</h3>
+                    <p>Aider les utilisateurs à maintenir des modes de vie actifs grâce à un suivi personnalisé</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Public Cible</h3>
+                    <p>Particuliers, coachs sportifs, et entreprises pour programmes wellness</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Innovation</h3>
+                    <p>Combinaison unique de suivi personnel et fonctionnalités sociales</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px; padding: 25px; background: #f8f9ff; border-radius: 15px;">
+                <h3>💡 Valeur Ajoutée</h3>
+                <p>Plateforme complète de coaching fitness numérique avec analyse de données avancée et engagement communautaire</p>
+            </div>
+        </div>
+
+        <!-- Slide 3: Fonctionnalités Principales -->
+        <div class="slide">
+            <h2>⭐ Fonctionnalités Principales</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>Enregistrement d'Entraînements</h3>
+                    <ul style="text-align: left;">
+                        <li>Saisie des séances d'exercice</li>
+                        <li>Suivi durée et intensité</li>
+                        <li>Calcul calories brûlées</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Suivi de Progression</h3>
+                    <ul style="text-align: left;">
+                        <li>Graphiques d'évolution</li>
+                        <li>Statistiques détaillées</li>
+                        <li>Comparaison avec objectifs</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Bibliothèque d'Exercices</h3>
+                    <ul style="text-align: left;">
+                        <li>Base de données complète</li>
+                        <li>Instructions détaillées</li>
+                        <li>Catégorisation par type</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Plans Personnalisés</h3>
+                    <ul style="text-align: left;">
+                        <li>Programmes adaptatifs</li>
+                        <li>Recommandations IA</li>
+                        <li>Planification flexible</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Défis Communautaires</h3>
+                    <ul style="text-align: left;">
+                        <li>Challenges collaboratifs</li>
+                        <li>Classements en temps réel</li>
+                        <li>Système de récompenses</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Analyse Avancée</h3>
+                    <ul style="text-align: left;">
+                        <li>Tendances de performance</li>
+                        <li>Rapports personnalisés</li>
+                        <li>Prédictions d'évolution</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Architecture Technique -->
+        <div class="slide">
+            <h2>🏗️ Architecture Technique</h2>
+            <div class="architecture-diagram">
+                <div class="arch-box">Frontend<br>React.js</div>
+                <span class="arrow">↔</span>
+                <div class="arch-box">API Gateway<br>Express.js</div>
+                <span class="arrow">↔</span>
+                <div class="arch-box">Base de Données<br>MongoDB</div>
+            </div>
+            
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <h3>🎨 Frontend</h3>
+                    <ul>
+                        <li>React.js 18</li>
+                        <li>React Router</li>
+                        <li>Chart.js</li>
+                        <li>PWA Support</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <h3>⚙️ Backend</h3>
+                    <ul>
+                        <li>Node.js</li>
+                        <li>Express.js</li>
+                        <li>Passport.js</li>
+                        <li>JWT Auth</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <h3>💾 Base de Données</h3>
+                    <ul>
+                        <li>MongoDB Atlas</li>
+                        <li>Mongoose ODM</li>
+                        <li>Indexes optimisés</li>
+                        <li>Réplication</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <h3>☁️ Infrastructure</h3>
+                    <ul>
+                        <li>Docker</li>
+                        <li>AWS/Azure</li>
+                        <li>Load Balancer</li>
+                        <li>CDN</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Modèle de Données -->
+        <div class="slide">
+            <h2>📊 Modèle de Données MongoDB</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">👤</div>
+                    <h3>Collection Users</h3>
+                    <ul style="text-align: left;">
+                        <li>Profils utilisateurs</li>
+                        <li>Préférences personnelles</li>
+                        <li>Objectifs fitness</li>
+                        <li>Données démographiques</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏋️</div>
+                    <h3>Collection Workouts</h3>
+                    <ul style="text-align: left;">
+                        <li>Séances d'entraînement</li>
+                        <li>Historique complet</li>
+                        <li>Métriques performance</li>
+                        <li>Timestamps détaillés</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💪</div>
+                    <h3>Collection Exercises</h3>
+                    <ul style="text-align: left;">
+                        <li>Bibliothèque d'exercices</li>
+                        <li>Instructions techniques</li>
+                        <li>Catégories et tags</li>
+                        <li>Niveau de difficulté</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Collection Challenges</h3>
+                    <ul style="text-align: left;">
+                        <li>Défis communautaires</li>
+                        <li>Participants et scores</li>
+                        <li>Règles et récompenses</li>
+                        <li>Progression temps réel</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Collection Progress</h3>
+                    <ul style="text-align: left;">
+                        <li>Données de progression</li>
+                        <li>Métriques temporelles</li>
+                        <li>Calculs statistiques</li>
+                        <li>Tendances d'évolution</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h3>Collection Plans</h3>
+                    <ul style="text-align: left;">
+                        <li>Plans d'entraînement</li>
+                        <li>Programmes personnalisés</li>
+                        <li>Calendrier d'activités</li>
+                        <li>Adaptations automatiques</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Planning de Développement -->
+        <div class="slide">
+            <h2>⏱️ Planning de Développement (6-8 mois)</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>📋 Phase 1 - Foundation (Mois 1-2)</h3>
+                    <ul>
+                        <li>Setup infrastructure et architecture</li>
+                        <li>Développement core features (authentification, profils)</li>
+                        <li>Configuration base de données</li>
+                        <li>Setup CI/CD pipeline</li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <h3>🏗️ Phase 2 - Core Features (Mois 3-4)</h3>
+                    <ul>
+                        <li>Enregistrement d'entraînements</li>
+                        <li>Bibliothèque d'exercices</li>
+                        <li>Interface utilisateur principale</li>
+                        <li>API RESTful complète</li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <h3>🚀 Phase 3 - Advanced Features (Mois 5-6)</h3>
+                    <ul>
+                        <li>Analytics et progression</li>
+                        <li>Fonctionnalités sociales</li>
+                        <li>Plans d'entraînement personnalisés</li>
+                        <li>Système de notifications</li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <h3>✨ Phase 4 - Polish & Launch (Mois 7-8)</h3>
+                    <ul>
+                        <li>Tests complets et optimisations</li>
+                        <li>Sécurité et performance</li>
+                        <li>Déploiement production</li>
+                        <li>Formation équipe support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Budget et Ressources -->
+        <div class="slide">
+            <h2>💰 Budget et Ressources</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 30px 0;">
+                <div>
+                    <h3>👥 Équipe Requise</h3>
+                    <ul>
+                        <li><strong>Chef de Projet:</strong> 1 personne</li>
+                        <li><strong>Développeurs Frontend:</strong> 2 personnes</li>
+                        <li><strong>Développeurs Backend:</strong> 2 personnes</li>
+                        <li><strong>Développeur Mobile:</strong> 1 personne</li>
+                        <li><strong>Designers UX/UI:</strong> 2 personnes</li>
+                        <li><strong>DevOps Engineer:</strong> 1 personne</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>💸 Répartition Budget Total: 200,000€</h3>
+                    <div class="budget-chart">
+                        <div class="budget-bar" style="height: 120px;">
+                            <div>Personnel<br><strong>60%</strong></div>
+                        </div>
+                        <div class="budget-bar" style="height: 60px;">
+                            <div>Infrastructure<br><strong>15%</strong></div>
+                        </div>
+                        <div class="budget-bar" style="height: 40px;">
+                            <div>Outils<br><strong>10%</strong></div>
+                        </div>
+                        <div class="budget-bar" style="height: 60px;">
+                            <div>Marketing<br><strong>15%</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="background: #f8f9ff; padding: 25px; border-radius: 15px; text-align: center;">
+                <h3>🎯 ROI Projeté</h3>
+                <p><strong>Break-even:</strong> 18 mois | <strong>Revenus Année 1:</strong> 500,000€ | <strong>Revenus Année 3:</strong> 2,000,000€</p>
+            </div>
+        </div>
+
+        <!-- Slide 8: Tests et Qualité -->
+        <div class="slide">
+            <h2>🧪 Stratégie de Test et Qualité</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Tests Unitaires</h3>
+                    <ul style="text-align: left;">
+                        <li>Jest pour fonctions métier</li>
+                        <li>Couverture > 80%</li>
+                        <li>Tests automatisés</li>
+                        <li>Validation logique calculs</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3>Tests d'Intégration</h3>
+                    <ul style="text-align: left;">
+                        <li>API endpoints</li>
+                        <li>Base de données</li>
+                        <li>Services externes</li>
+                        <li>Flux de données</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎭</div>
+                    <h3>Tests End-to-End</h3>
+                    <ul style="text-align: left;">
+                        <li>Cypress pour UI</li>
+                        <li>Parcours utilisateur</li>
+                        <li>Scénarios critiques</li>
+                        <li>Cross-browser</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Tests de Performance</h3>
+                    <ul style="text-align: left;">
+                        <li>Load testing Artillery</li>
+                        <li>1000+ utilisateurs</li>
+                        <li>Temps réponse < 2s</li>
+                        <li>Optimisation continue</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Tests de Sécurité</h3>
+                    <ul style="text-align: left;">
+                        <li>Audit vulnérabilités</li>
+                        <li>Tests penetration</li>
+                        <li>Validation données</li>
+                        <li>Conformité RGPD</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Tests Compatibilité</h3>
+                    <ul style="text-align: left;">
+                        <li>iOS / Android</li>
+                        <li>Navigateurs modernes</li>
+                        <li>Responsivité</li>
+                        <li>Accessibilité</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Risques et Mitigation -->
+        <div class="slide">
+            <h2>⚠️ Gestion des Risques</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                <div>
+                    <h3>🔧 Risques Techniques</h3>
+                    <div style="background: #fff2f2; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                        <strong>Complexité calculs fitness</strong>
+                        <p>→ Validation avec experts du domaine</p>
+                    </div>
+                    <div style="background: #fff2f2; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                        <strong>Performance avec big data</strong>
+                        <p>→ Architecture scalable dès le début</p>
+                    </div>
+                    <div style="background: #fff2f2; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                        <strong>Synchronisation offline/online</strong>
+                        <p>→ Stratégie de conflict resolution</p>
+                    </div>
+                </div>
+                <div>
+                    <h3>💼 Risques Business</h3>
+                    <div style="background: #f2f8ff; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                        <strong>Concurrence forte</strong>
+                        <p>→ Différenciation par fonctionnalités uniques</p>
+                    </div>
+                    <div style="background: #f2f8ff; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                        <strong>Adoption utilisateur lente</strong>
+                        <p>→ Marketing ciblé et partenariats</p>
+                    </div>
+                    <div style="background: #f2f8ff; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                        <strong>Réglementations santé</strong>
+                        <p>→ Conformité légale stricte</p>
+                    </div>
+                </div>
+            </div>
+            <div style="background: #f0f8f0; padding: 25px; border-radius: 15px; text-align: center; margin-top: 30px;">
+                <h3>📋 Plan de Contingence</h3>
+                <p>Surveillance continue des KPIs, ajustements agiles, et budget de réserve de 15% pour imprévus</p>
+            </div>
+        </div>
+
+        <!-- Slide 10: Conclusion -->
+        <div class="slide">
+            <h1>🎯 Conclusion</h1>
+            <div style="text-align: center; margin: 40px 0;">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">✅</div>
+                        <h3>Solution Complète</h3>
+                        <p>Plateforme tout-en-un pour le fitness avec fonctionnalités avancées</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🚀</div>
+                        <h3>Technologies Modernes</h3>
+                        <p>Stack React/Express/MongoDB pour performance et scalabilité</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💰</div>
+                        <h3>ROI Attractif</h3>
+                        <p>Modèle économique viable avec potentiel de croissance élevé</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; border-radius: 20px; text-align: center; margin: 40px 0;">
+                <h2>🎊 Prêt à Transformer le Fitness Numérique</h2>
+                <p style="font-size: 1.2em; margin: 20px 0;">Une opportunité unique de créer la prochaine génération d'applications de fitness</p>
+                <div style="margin-top: 30px;">
+                    <strong>📧 Contact:</strong> fitness-project@company.com<br>
+                    <strong>📞 Téléphone:</strong> +33 1 23 45 67 89
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Précédent</button>
+            <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Suivant →</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('total-slides').textContent = totalSlides;
+        
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+            
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+        
+        function changeSlide(direction) {
+            if (direction === 1 && currentSlide < totalSlides - 1) {
+                showSlide(currentSlide + 1);
+            } else if (direction === -1 && currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                changeSlide(1);
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                changeSlide(-1);
+            }
+        });
+        
+        // Initialize
+        showSlide(0);
+        
+        // Auto-advance slides (optional - uncomment to enable)
+        /*
+        setInterval(() => {
+            if (currentSlide < totalSlides - 1) {
+                changeSlide(1);
+            }
+        }, 10000); // Change slide every 10 seconds
+        */
+    </script>
+</body>
+</html>
