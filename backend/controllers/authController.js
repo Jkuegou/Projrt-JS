@@ -35,6 +35,24 @@ const registerUser = async (req, res) => {
   }
 };
 
+// PATCH /api/users/profile/personal
+const updatePersonalInfo = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    if (!user) return res.status(404).json({ message: 'Utilisateur non trouvé' });
+
+    user.gender = req.body.gender;
+    user.age = req.body.age;
+    user.dateOfBirth = req.body.dateOfBirth;
+
+    await user.save();
+    res.json({ message: 'Informations personnelles mises à jour' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
 // Login user
 const loginUser = async (req, res) => {
   try {
